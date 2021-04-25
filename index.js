@@ -83,7 +83,7 @@ function findEmployeeByFirstName(array, firstName) {
 //accumulates all dates and pay rates
 function calculatePayroll (record){
     // console.log(record)    
-    return record.reduce(function(acc, val) {
+    return record.reduce((acc, val) => {
         return acc + allWagesFor.apply(val)
     }, 0)
 }
