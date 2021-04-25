@@ -8,7 +8,7 @@
  As a result, the lessons for this function will pass *and* it will be available
  for you to use if you need it!
  */
- const createEmployeeRecord = array => {
+function createEmployeeRecord(array) {
     let testEmployee = {
         firstName: array[0],
         familyName: array[1],
@@ -17,45 +17,58 @@
         timeInEvents: [],
         timeOutEvents: []
 };
-// return this.array
 return testEmployee
 };
-
-const createEmployeeRecords = arrArr => {
+// creates array of arrays for all punched in employees
+function createEmployeeRecords (arrArr) {
     const catalog = arrArr.map(array => createEmployeeRecord(array))
     return catalog
 }
-
-const createTimeInEvent = (employeeRecord) => {
-//     console.log(`employeeRecord is:`, employeeRecord);
-// console.log(`date is:`, date);
-    const time = employeeRecord.split(' ')
-    let newEvent = {
+//fills time in event
+function createTimeInEvent(date) {
+    const time = date.split(' ')
+    this.timeInEvents.push({
         type: 'TimeIn',
         hour: parseInt(time[1]),
-        date: time[0],
-        // func : () => this//????
-    // employeeRecord.timeInEvents.push(newEvent)
-    
-// console.log(date)    
+        date: time[0],  
+    })
+    return this
 }
-console.log(employeeRecord)
+//fills time out event
+function createTimeOutEvent(date) {
+    const time = date.split(' ')
+    this.timeOutEvents.push({
+        type: 'TimeOut',
+        hour: parseInt(time[1]),
+        date: time[0],  
+    })
+    return this
 }
 
+// returns hours worked
+function hoursWorkedOnDate(date) {
+    const timeIn = this.timeInEvents.find(time => date == time.date)
+    const timeOut = this.timeOutEvents.find(time => date == time.date)
+    const totalHrs = (timeOut.hour - timeIn.hour) / 100
+    return totalHrs
+}
 
+function wagesEarnedOnDate(payDate) {
+    const payRate = this.payPerHour
+    const hrsWorked = hoursWorkedOnDate.call(this, payDate)
+    // console.log(hrsWorked)
+    const totalWages = payRate * hrsWorked
+    return totalWages
+}
 
-
-
-
-
-
-
-// Also confused 
-const allWagesFor = () => {
+// Also confused nvm
+// all good
+function allWagesFor() {
+    // console.log(this)
     let eligibleDates = this.timeInEvents.map(function (e) {
         return e.date
     })
-
+    // console.log(eligibleDates)
     let payable = eligibleDates.reduce(function (memo, d) {
         return memo + wagesEarnedOnDate.call(this, d)
     }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
@@ -63,7 +76,14 @@ const allWagesFor = () => {
     return payable
 }
 // finds employee by name re-used function from my intro_context_lab
-const findEmployeeByFirstName = (array, firstName) => {
+function findEmployeeByFirstName(array, firstName) {
     firstName = array.find(x => x.firstName)
     return firstName
+}
+//accumulates all dates and pay rates
+function calculatePayroll (record){
+    // console.log(record)    
+    return record.reduce(function(acc, val) {
+        return acc + allWagesFor.apply(val)
+    }, 0)
 }
