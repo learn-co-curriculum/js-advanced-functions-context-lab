@@ -15,8 +15,7 @@
         title: array[2],
         payPerHour: array[3],
         timeInEvents: [],
-        timeOutEvents: [],
-        func : () => this
+        timeOutEvents: []
 
 };
 // return this.array
@@ -28,16 +27,20 @@ const createEmployeeRecords = arrArr => {
     return catalog
 }
 
-const createTimeInEvent = (employeeRecord) => {
-    const time = employeeRecord.split(' ')
-    let newEvent = {
-        type: 'TimeIn',
-        hour: parseInt(time[1]),
-        date: time[0]
-    }
+const createTimeInEvent = (employeeRecord, date) => {
+    console.log(`employeeRecord is:`, employeeRecord);
+console.log(`date is:`, date);
+    // const time = employeeRecord.split(' ')
+    // let newEvent = {
+    //     type: 'TimeIn',
+    //     hour: parseInt(time[1]),
+    //     date: time[0],
+    //     func : () => this//????
     // employeeRecord.timeInEvents.push(newEvent)
-    console.log(employeeRecord)
+    // console.log(employeeRecord)
+// console.log(date)    
 }
+
 
 
 
