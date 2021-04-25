@@ -87,3 +87,5 @@ function calculatePayroll (record){
         return acc + allWagesFor.apply(val)
     }, 0)
 }
+//WWWOOOOOOOOOOOOOOOOO so happy 
+//ok so this/bind/call/apply are pretty cool now that it makes sense
